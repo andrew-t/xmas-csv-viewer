@@ -2,8 +2,9 @@ import * as THREE from './three.js/three.module.js';
 
 let camera, scene, renderer;
 
-const coordsFile = 'coords/harvard.csv',
-	effectFile = 'effects/harvard/example-rainbow.csv';
+const coordsFile = 'coords/matt.csv',
+	effectFile = 'effects/harvard/example-rainbow.csv',
+	trimLights = 0.1;
 
 function csvRows(t) {
 	return t.split('\n')
@@ -54,6 +55,7 @@ function init(coords, effect) {
 	const textureLoader = new THREE.TextureLoader();
 	const sprite = textureLoader.load('light.png');
 
+	let lastLight;
 	const lights = coords.map(c => {
 		const pos = new THREE.Vector3(...c);
 		const geo = new THREE.BufferGeometry();
@@ -65,9 +67,13 @@ function init(coords, effect) {
 			depthTest: false,
 			transparent: true
 		});
-		const particles = new THREE.Points(geo, mat);
-		scene.add(particles);
-		return { pos, mat, particles };
+		const show = !lastLight || pos.distanceTo(lastLight) >= trimLights;
+		if (show) {
+			lastLight = pos;
+			const particles = new THREE.Points(geo, mat);
+			scene.add(particles);
+		}
+		return { pos, mat, show };
 	});
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -87,7 +93,8 @@ function animation(lights, effect) {
 		f = (f + 1) % effect.length;
 
 		for (let i = 0; i < lights.length; ++i)
-			lights[i].mat.color.setRGB(...effect[f][i]);
+			if (lights[i].show)
+				lights[i].mat.color.setRGB(...effect[f][i]);
 
 		camera.position.x = 3 * Math.sin(t);
 		camera.position.y = 3 * Math.cos(t);

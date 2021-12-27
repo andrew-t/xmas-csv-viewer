@@ -2,6 +2,8 @@
 
 Basically I am a JavaScript person and not a Python person so when I came to do [Matt's silly tree thing this year](https://www.youtube.com/watch?v=WuMRJf6B5Q4) I wanted a viewer that would work without setting up a Python environment. This is it. It's not especially nice but maybe you can use it.
 
+I have no idea if the framerate even approximately matches the real tree.
+
 # Using it
 
 1. Clone this repo somewhere
