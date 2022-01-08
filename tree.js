@@ -1,4 +1,4 @@
-import * as THREE from './three.js/three.module.js';
+import * as THREE from 'https://cdn.skypack.dev/pin/three@v0.136.0-4Px7Kx1INqCFBN0tXUQc/mode=imports,min/optimized/three.js';
 
 const camera = new THREE.PerspectiveCamera(
 		70,
