@@ -4,12 +4,49 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-	<script type="module" src="./script.js"></script>
+	<script type="module" src="./main.js"></script>
 	<style type="text/css">
 		body { margin: 0; padding: 0; }
+		#controls {
+			z-index: 100;
+			position: absolute;
+			left: 1em;
+			width: 15em;
+		}
+		select, label {
+			display: block;
+			margin-top: 1em;
+			width: 15em;
+		}
+		label {
+			color: white;
+			font-family: sans-serif;
+		}
+		.hidden {
+			display: none;
+		}
 	</style>
 </head>
 <body>
-
+	<div id="controls">
+		<select id="tree">
+			<option value="matt">Matt's Tree</option>
+			<option value="harvard">Harvard Example Tree</option>
+			<option value="custom">Upload GIFT Tree</option>
+		</select>
+		<select id="effect">
+			<option value="grads">Colour gradients (for Matt's tree)</option>
+			<option value="candycane">Candycane (for Matt's tree)</option>
+			<option value="lavalamp">Lavalamp (for Matt's tree)</option>
+			<option value="test">Test pattern (for Matt's tree)</option>
+			<option value="rolling">Rolling (for Matt's tree)</option>
+			<option value="harvard/example-rainbow">Harvard Rainbow Example</option>
+			<option value="harvard/example-wave">Harvard Wave Example</option>
+			<option value="custom">Upload GIFT Pattern</option>
+		</select>
+		<label><input type="checkbox" id="60fps" checked> 60fps</label>
+		<label><input type="checkbox" id="spin" checked> Spin</label>
+		<input class="hidden" type="file" id="upload" accept=".csv" />
+	</div>
 </body>
 </html>
